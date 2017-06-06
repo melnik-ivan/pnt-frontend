@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenAuthService } from './token/token-auth.service';
 import { LoginComponent } from './login/login.component';
+import { RoomsListComponent } from './rooms-list/rooms-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RoomsListComponent
   ],
   imports: [
     BrowserModule,

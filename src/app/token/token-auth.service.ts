@@ -2,13 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
+import { URLS } from '../api';
 
 @Injectable()
 export class TokenAuthService {
-  private hostUrl = 'http://127.0.0.1:8000/';
-  private getTokenUrl = this.hostUrl + 'api-token-auth/';
-  private refreshTokenUrl = this.hostUrl + 'api-token-refresh/';
-  private verifyTokenUrl = this.hostUrl + 'api-token-verify/';
   private token: string = this.localTokenLoader();
   private headers = new Headers({'Content-Type': 'application/json'});
   private updaterOn = false;
@@ -31,7 +28,7 @@ export class TokenAuthService {
   }
 
   requestToken(username: string, password: string): Promise<string> {
-    const res = this.http.post(this.getTokenUrl, JSON.stringify(
+    const res = this.http.post(URLS.getTokenUrl, JSON.stringify(
       {username: username, password: password}), {headers: this.headers}
     )
       .toPromise()
@@ -43,7 +40,7 @@ export class TokenAuthService {
 
   refreshToken(): Promise<string> {
     console.log('refresh token: ' + this.token);
-    const res = this.http.post(this.refreshTokenUrl, JSON.stringify({token: this.token}), {headers: this.headers})
+    const res = this.http.post(URLS.refreshTokenUrl, JSON.stringify({token: this.token}), {headers: this.headers})
       .toPromise()
       .then(response => this.token = response.json()['token'])
       .catch(this.handleError);
@@ -52,11 +49,10 @@ export class TokenAuthService {
   }
 
   verifyToken(): Promise<boolean> {
-    const res = this.http.post(this.verifyTokenUrl, JSON.stringify({token: this.token}), {headers: this.headers})
+    return this.http.post(URLS.verifyTokenUrl, JSON.stringify({token: this.token}), {headers: this.headers})
       .toPromise()
       .then(response => this.token === response.json()['token'])
       .catch(this.handleError);
-    return res;
   }
 
   getToken(): string {
