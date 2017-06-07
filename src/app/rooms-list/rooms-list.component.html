@@ -1,3 +1,5 @@
-<p>
-  rooms-list works!
-</p>
+<div *ngIf="rooms !== undefined">
+  <div *ngFor="let room of rooms">
+    <p>{{room.title}}</p>
+  </div>
+</div>

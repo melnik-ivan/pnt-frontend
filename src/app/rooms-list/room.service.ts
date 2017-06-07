@@ -15,7 +15,6 @@ export class RoomService {
   });
 
   constructor(private http: Http,
-              private router: Router,
               private tokenAuthService: TokenAuthService) {
   }
 
@@ -27,28 +26,28 @@ export class RoomService {
   getRoom(roomId: number): Promise<Room> {
     return this.http.get(URLS.roomsUrl + roomId.toString() + '/', {headers: this.headers})
       .toPromise()
-      .then(response => response.json().results as Room)
+      .then(response => response.json() as Room)
       .catch(this.handleError);
   }
 
   getRooms(): Promise<Room[]> {
     return this.http.get(URLS.roomsUrl, {headers: this.headers})
       .toPromise()
-      .then(response => response.json().results as Room[])
+      .then(response => response.json() as Room[])
       .catch(this.handleError);
   }
 
   postRoom(room: Room): Promise<Room> {
     return this.http.post(URLS.roomsUrl, JSON.stringify(room), {headers: this.headers})
       .toPromise()
-      .then(response => response.json().results as Room)
+      .then(response => response.json() as Room)
       .catch(this.handleError);
   }
 
   putRoom(room: Room): Promise<Room> {
     return this.http.post(URLS.roomsUrl + room.id.toString() + '/', JSON.stringify(room), {headers: this.headers})
       .toPromise()
-      .then(response => response.json().results as Room)
+      .then(response => response.json() as Room)
       .catch(this.handleError);
   }
 

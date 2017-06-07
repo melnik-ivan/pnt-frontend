@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TokenAuthService } from './token/token-auth.service';
 import { LoginComponent } from './login/login.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
+import { RoomService } from './rooms-list/room.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,10 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [TokenAuthService],
+  providers: [
+    TokenAuthService,
+    RoomService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
