@@ -9,12 +9,15 @@ import { TokenAuthService } from './token/token-auth.service';
 import { LoginComponent } from './login/login.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { RoomService } from './rooms-list/room.service';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageService } from './messages/message.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RoomsListComponent
+    RoomsListComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { RoomService } from './rooms-list/room.service';
   ],
   providers: [
     TokenAuthService,
-    RoomService
+    RoomService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

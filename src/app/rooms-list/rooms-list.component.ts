@@ -25,7 +25,7 @@ export class RoomsListComponent implements OnInit {
   }
 
   getRooms(): void {
-    this.roomService.getRooms().then(rooms => this.rooms = rooms).then(() => console.log(this.rooms));
+    this.roomService.getRooms().then(rooms => this.rooms = rooms);
   }
 
 }
