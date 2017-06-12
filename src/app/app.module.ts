@@ -11,13 +11,15 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { RoomService } from './rooms-list/room.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './messages/message.service';
+import { MessengerComponent } from './messenger/messenger.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RoomsListComponent,
-    MessagesComponent
+    MessagesComponent,
+    MessengerComponent
   ],
   imports: [
     BrowserModule,

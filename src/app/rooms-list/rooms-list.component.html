@@ -1,5 +1,27 @@
-<div *ngIf="rooms !== undefined">
-  <div *ngFor="let room of rooms">
-    <p>{{room.title}}</p>
+<div class="room-list-container">
+  <div class="room-button-panel">
+      <button class="room-list-button">Invite</button>
+      <button class="room-list-button">Create</button>
+  </div>
+  <div class="room-search">
+    <input #searchBox type="text" placeholder="search" (keyup)="updateDisplayedRooms(searchBox.value)">
+    <i class="fa fa-search">
+    </i>
+  </div>
+  <div *ngIf="displayedRooms !== undefined">
+    <ul class="room-list">
+      <li *ngFor="let room of displayedRooms"
+          class="room-instance"
+          (click)="onSelectRoom(room)"
+          [class.selected]="room === selectedRoom"
+      >
+        <div class="room-about">
+          <div class="room-name">
+            {{room.title}}
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
+

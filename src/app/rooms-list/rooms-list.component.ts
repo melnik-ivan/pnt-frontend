@@ -10,6 +10,8 @@ import { Room } from './room';
 })
 export class RoomsListComponent implements OnInit {
   rooms: Room[];
+  displayedRooms: Room[];
+  selectedRoom: Room;
 
   constructor(
     private roomService: RoomService,
@@ -24,8 +26,22 @@ export class RoomsListComponent implements OnInit {
       .then(res => this.getRooms());
   }
 
+  updateDisplayedRooms(query: string): void {
+    this.displayedRooms = this.rooms.filter(room => room.title.includes(query));
+  }
+
   getRooms(): void {
-    this.roomService.getRooms().then(rooms => this.rooms = rooms);
+    this.roomService.getRooms().then(rooms => {
+      this.rooms = rooms;
+      if (this.rooms.length > 0) {
+        this.selectedRoom = this.rooms[0];
+      }
+      this.updateDisplayedRooms('');
+    });
+  }
+
+  onSelectRoom(room: Room): void {
+    this.selectedRoom = room;
   }
 
 }
