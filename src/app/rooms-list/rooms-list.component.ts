@@ -54,7 +54,10 @@ export class RoomsListComponent implements OnInit {
   }
 
   onCreateOk(roomTitle: string): void {
-    this.roomService.postRoom(roomTitle).then(res => console.log(res));
+    this.roomService.postRoom(roomTitle).then(room => {
+      this.getRooms();
+    });
+    this.onToggleOff('create');
   }
 
 }
