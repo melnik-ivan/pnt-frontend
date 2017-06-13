@@ -13,8 +13,7 @@
       <li *ngFor="let room of displayedRooms"
           class="room-instance"
           (click)="onSelectRoom(room)"
-          [class.selected]="room === selectedRoom"
-      >
+          [class.selected]="room === selectedRoom">
         <div class="room-about">
           <div class="room-name">
             {{room.title}}

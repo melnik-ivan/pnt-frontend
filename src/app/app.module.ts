@@ -12,6 +12,8 @@ import { RoomService } from './rooms-list/room.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './messages/message.service';
 import { MessengerComponent } from './messenger/messenger.component';
+import { UserComponent } from './user/user.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { MessengerComponent } from './messenger/messenger.component';
     LoginComponent,
     RoomsListComponent,
     MessagesComponent,
-    MessengerComponent
+    MessengerComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { MessengerComponent } from './messenger/messenger.component';
   providers: [
     TokenAuthService,
     RoomService,
-    MessageService
+    MessageService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

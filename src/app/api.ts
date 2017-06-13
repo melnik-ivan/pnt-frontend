@@ -5,5 +5,7 @@ export const URLS = {
   refreshTokenUrl: host + 'api-token-refresh/',
   verifyTokenUrl: host + 'api-token-verify/',
   roomsUrl: host + 'rooms/',
-  messagesUrl: host + 'messages/'
+  messagesUrl: host + 'messages/',
+  currentUserUrl: host + 'current_user/',
+  usersUrl: host + 'users/',
 };
