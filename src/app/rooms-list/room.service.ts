@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { URLS } from '../api';
 import { Room } from './room';
 import { TokenAuthService } from '../token/token-auth.service';
+import {UserService} from "../user/user.service";
 
 
 @Injectable()
@@ -13,8 +14,11 @@ export class RoomService {
     'Authorization': 'JWT ' + this.tokenAuthService.getToken()
   });
 
-  constructor(private http: Http,
-              private tokenAuthService: TokenAuthService) {
+  constructor(
+    private http: Http,
+    private tokenAuthService: TokenAuthService,
+    private userService: UserService
+  ) {
   }
 
   private handleError(error: any): Promise<any> {
@@ -36,11 +40,23 @@ export class RoomService {
       .catch(this.handleError);
   }
 
-  postRoom(room: Room): Promise<Room> {
-    return this.http.post(URLS.roomsUrl, JSON.stringify(room), {headers: this.headers})
-      .toPromise()
-      .then(response => response.json() as Room)
-      .catch(this.handleError);
+  postRoom(title: string): Promise<Room> {
+    let room: Room;
+    return this.userService.getCurrentUser().then(user => {
+      room = {
+        id: 0,
+        title: title,
+        owner: user.id,
+        members: [user.id],
+        messages: []
+      };
+    })
+      .then(() => this.http.post(URLS.roomsUrl, JSON.stringify(room), {headers: this.headers})
+        .toPromise()
+        .then(response => response.json() as Room)
+        .catch(this.handleError)
+    );
+
   }
 
   putRoom(room: Room): Promise<Room> {

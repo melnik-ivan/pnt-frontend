@@ -1,7 +1,12 @@
 <div class="room-list-container">
   <div class="room-button-panel">
-      <button class="room-list-button">Invite</button>
-      <button class="room-list-button">Create</button>
+    <button class="room-list-button">Invite</button>
+    <button class="room-list-button" *ngIf="!toggles.create" (click)="onToggleOn('create')">Create</button>
+    <button class="room-list-button" *ngIf="toggles.create" (click)="onToggleOff('create')">Cancel</button>
+    <p *ngIf="toggles.create">
+      <input #roomTitle type="text" placeholder="Room Title">
+      <button class="room-create-button" (click)="onCreateOk(roomTitle.value)">Ok</button>
+    </p>
   </div>
   <div class="room-search">
     <input #searchBox type="text" placeholder="search" (keyup)="updateDisplayedRooms(searchBox.value)">

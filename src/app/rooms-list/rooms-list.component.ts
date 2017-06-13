@@ -12,6 +12,7 @@ export class RoomsListComponent implements OnInit {
   rooms: Room[];
   displayedRooms: Room[];
   selectedRoom: Room;
+  toggles = {create: false, invite: false};
 
   constructor(
     private roomService: RoomService,
@@ -42,6 +43,18 @@ export class RoomsListComponent implements OnInit {
 
   onSelectRoom(room: Room): void {
     this.selectedRoom = room;
+  }
+
+  onToggleOn(key: string): void {
+    this.toggles[key] = true;
+  }
+
+  onToggleOff(key: string): void {
+    this.toggles[key] = false;
+  }
+
+  onCreateOk(roomTitle: string): void {
+    this.roomService.postRoom(roomTitle).then(res => console.log(res));
   }
 
 }
