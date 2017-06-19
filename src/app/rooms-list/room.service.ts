@@ -60,7 +60,7 @@ export class RoomService {
   }
 
   putRoom(room: Room): Promise<Room> {
-    return this.http.post(URLS.roomsUrl + room.id.toString() + '/', JSON.stringify(room), {headers: this.headers})
+    return this.http.put(URLS.roomsUrl + room.id.toString() + '/', JSON.stringify(room), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Room)
       .catch(this.handleError);

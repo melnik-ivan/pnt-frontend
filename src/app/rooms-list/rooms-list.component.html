@@ -1,12 +1,33 @@
 <div class="room-list-container">
   <div class="room-button-panel">
-    <button class="room-list-button">Invite</button>
-    <button class="room-list-button" *ngIf="!toggles.create" (click)="onToggleOn('create')">Create</button>
+    <button class="room-list-button" *ngIf="!toggles.invite && !toggles.create && currentUser?.id === selectedRoom?.owner" (click)="onToggleOn('invite')">
+      Invite
+    </button>
+    <button class="room-list-button" *ngIf="toggles.invite" (click)="onToggleOff('invite')">Cancel</button>
+
+    <button class="room-list-button" *ngIf="!toggles.create && !toggles.invite" (click)="onToggleOn('create')">
+      Create
+    </button>
     <button class="room-list-button" *ngIf="toggles.create" (click)="onToggleOff('create')">Cancel</button>
-    <p *ngIf="toggles.create">
+
+    <div *ngIf="toggles.create">
       <input #roomTitle type="text" placeholder="Room Title">
       <button class="room-create-button" (click)="onCreateOk(roomTitle.value)">Ok</button>
-    </p>
+    </div>
+    <div *ngIf="toggles.invite">
+      <input #userSearchBox type="text" placeholder="search" (keyup)="searchUsers(userSearchBox.value)">
+        <ul class="room-list">
+          <li *ngFor="let user of users | async"
+              class="room-instance"
+              (click)="onSelectUser(user)">
+            <div class="room-about">
+              <div class="room-name">
+                {{user.username}}
+              </div>
+            </div>
+          </li>
+        </ul>
+    </div>
   </div>
   <div class="room-search">
     <input #searchBox type="text" placeholder="search" (keyup)="updateDisplayedRooms(searchBox.value)">

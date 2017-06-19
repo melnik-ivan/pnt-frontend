@@ -30,8 +30,13 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get(URLS.usersUrl, {headers: this.headers})
+  // getUsers(): Observable<User[]> {
+  //   return this.http.get(URLS.usersUrl, {headers: this.headers})
+  //     .map(response => response.json().results as User[]);
+  // }
+
+  searchUsers(usernamePart: string): Observable<User[]> {
+    return this.http.get(URLS.usersUrl + '?search=' + usernamePart, {headers: this.headers})
       .map(response => response.json().results as User[]);
   }
 }
