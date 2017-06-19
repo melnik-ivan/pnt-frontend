@@ -1,5 +1,6 @@
 <div *ngIf="messages !== undefined">
-  <div *ngFor="let message of messages">
-    <p>{{message.content}}</p>
+  <div *ngFor="let message of displayedMessages">
+    <p>{{message.owner}}: {{message.content}}</p>
   </div>
+  <input #content type="text"><button (click)="sendMessage(content.value)">Send</button>
 </div>

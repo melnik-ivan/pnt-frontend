@@ -30,6 +30,13 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  getUser(id: number): Promise<User> {
+    return this.http.get(URLS.usersUrl + id.toString() + '/', {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
+  }
+
   // getUsers(): Observable<User[]> {
   //   return this.http.get(URLS.usersUrl, {headers: this.headers})
   //     .map(response => response.json().results as User[]);

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.loginService.login(this.login, this.password).then(res => {
       if (res) {
-        this.router.navigate(['/rooms']);
+        this.router.navigate(['/messenger']);
       }
     });
   }

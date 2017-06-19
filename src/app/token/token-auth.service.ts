@@ -66,7 +66,7 @@ export class TokenAuthService {
   updateTokenStart(): void {
     const refresh = this.refreshToken.bind(this);
     if (!this.updaterOn) {
-      setInterval(refresh, 10000);
+      setInterval(refresh, 90000);
       this.updaterOn = true;
     } else {
       console.log('ignor');

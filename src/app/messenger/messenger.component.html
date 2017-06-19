@@ -1,3 +1,4 @@
-<p>
-  messenger works!
-</p>
+<app-rooms-list #lr [messagesComponent] = "msg"></app-rooms-list>
+<app-messages #msg [roomListComponent]="lr"></app-messages>
+
+

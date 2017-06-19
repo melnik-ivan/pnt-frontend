@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { RoomService } from './room.service';
 import { TokenAuthService } from '../token/token-auth.service';
 import { Room } from './room';
@@ -13,6 +13,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import { MessagesComponent } from '../messages/messages.component';
 
 @Component({
   selector: 'app-rooms-list',
@@ -21,10 +22,17 @@ import 'rxjs/add/operator/switchMap';
 })
 export class RoomsListComponent implements OnInit {
   rooms: Room[];
-  users: Observable<User[]>;
-  currentUser: User;
-  displayedRooms: Room[];
-  selectedRoom: Room;
+  users: Observable<User[]>; // TODO: replace to UserComponent
+  currentUser: User; // TODO: replace to UserComponent
+  displayedRooms: Room[] = [];
+  @Input() messagesComponent: MessagesComponent;
+  selectedRoom: Room = {
+    id: 0,
+    title: '',
+    owner: 0,
+    members: [],
+    messages: []
+  };
   toggles = {create: false, invite: false};
   private searchTerms = new Subject<string>();
 
@@ -70,6 +78,7 @@ export class RoomsListComponent implements OnInit {
 
   onSelectRoom(room: Room): void {
     this.selectedRoom = room;
+    this.messagesComponent.updateDisplayedMessages();
   }
 
   onToggleOn(key: string): void {

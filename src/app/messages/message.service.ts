@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { URLS } from '../api';
 import { Message } from './message';
 import { TokenAuthService } from '../token/token-auth.service';
+import { Room } from '../rooms-list/room';
 
 
 @Injectable()
@@ -31,6 +32,13 @@ private headers = new Headers({
 
   getMessages(): Promise<Message[]> {
     return this.http.get(URLS.messagesUrl, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as Message[])
+      .catch(this.handleError);
+  }
+
+  getMessagesByRoom(room: Room): Promise<Message[]> {
+    return this.http.get(URLS.messagesUrl + '?room=' + room.id, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Message[])
       .catch(this.handleError);
