@@ -1,10 +1,12 @@
-<div class="room-list-container">
+<div class="room-list">
+
   <div class="room-button-panel">
-    <button class="room-list-button" *ngIf="!toggles.invite && !toggles.create && currentUser?.id === selectedRoom?.owner" (click)="onToggleOn('invite')">
+    <button class="room-list-button"
+            *ngIf="!toggles.invite && !toggles.create && currentUser?.id === selectedRoom?.owner"
+            (click)="onToggleOn('invite')">
       Invite
     </button>
     <button class="room-list-button" *ngIf="toggles.invite" (click)="onToggleOff('invite')">Cancel</button>
-
     <button class="room-list-button" *ngIf="!toggles.create && !toggles.invite" (click)="onToggleOn('create')">
       Create
     </button>
@@ -16,35 +18,16 @@
     </div>
     <div *ngIf="toggles.invite">
       <input #userSearchBox type="text" placeholder="search" (keyup)="searchUsers(userSearchBox.value)">
-        <ul class="room-list">
-          <li *ngFor="let user of users | async"
-              class="room-instance"
-              (click)="onSelectUser(user)">
-            <div class="room-about">
-              <div class="room-name">
-                {{user.username}}
-              </div>
-            </div>
-          </li>
-        </ul>
+      <ul class="user-list">
+        <li *ngFor="let user of users | async"
+            class="room-instance"
+            (click)="onSelectUser(user)"><span>{{user.username}}</span></li>
+      </ul>
     </div>
   </div>
-  <div class="room-search">
-    <input #searchBox type="text" placeholder="search" (keyup)="updateDisplayedRooms(searchBox.value)">
-    <i class="fa fa-search">
-    </i>
-  </div>
-    <ul class="room-list">
-      <li *ngFor="let room of displayedRooms"
-          class="room-instance"
-          (click)="onSelectRoom(room)"
-          [class.selected]="room === selectedRoom">
-        <div class="room-about">
-          <div class="room-name">
-            {{room.title}}
-          </div>
-        </div>
-      </li>
-    </ul>
+
+  <ul *ngFor="let room of displayedRooms">
+    <li [class.selected]="room === selectedRoom" (click)="onSelectRoom(room)"><span>{{room.title}}</span></li>
+  </ul>
 </div>
 

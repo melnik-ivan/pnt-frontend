@@ -77,6 +77,7 @@ export class RoomsListComponent implements OnInit {
   }
 
   onSelectRoom(room: Room): void {
+    this.onToggleOff('invite');
     this.selectedRoom = room;
     this.messagesComponent.updateDisplayedMessages();
   }

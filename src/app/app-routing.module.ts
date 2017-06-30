@@ -7,7 +7,7 @@ import { MessengerComponent } from './messenger/messenger.component';
 
 
 const routes: Routes = [
-  { path: 'static', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'rooms', component: RoomsListComponent },
   { path: 'messages', component: MessagesComponent },
