@@ -55,4 +55,7 @@
   background-color: #697f9c;
 }
 
-.room-list::-webkit-scrollbar { width: 0; }
+.room-list::-webkit-scrollbar {
+  width: 0;
+  -ms-overflow-style: none;
+}
